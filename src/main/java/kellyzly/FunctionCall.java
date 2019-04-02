@@ -4,7 +4,7 @@ import java.text.DecimalFormat;
 import java.util.function.Function;
 
 public class FunctionCall {
-  // Predicate
+    // Predicate
     //Consumer
     // Function
     //Supplier
@@ -15,15 +15,18 @@ public class FunctionCall {
     // method  reference 希望能少定义一些接口
     //Function<Integer,String> input : Integer  output: String
 
-    public static void printMoney(Function<Integer,String> moneyFormat, Integer a){
+    public static void printMoney(Function<Integer, String> moneyFormat, Integer a) {
         System.out.println(moneyFormat.apply(a));
 
     }
 
+
     public static void main(String[] args) {
-     Function<Integer, String> moneyFormat = i ->new DecimalFormat("#,###").format(i);
-     printMoney(moneyFormat, 9999);
+        Function<Integer, String> moneyFormat = i -> new DecimalFormat("#,###").format(i);
+        printMoney(moneyFormat, 9999);
 
 
+        Function<Integer, String> format = i -> new DecimalFormat("#,###").format(i);
+        printMoney(format, 99);
     }
 }

@@ -8,31 +8,34 @@ import java.util.concurrent.locks.ReentrantLock;
 public class ReetranLockTest {
 
 
-    private static ExecutorService pool = new ThreadPoolExecutor(10, 10, 60L, TimeUnit.SECONDS,    new ArrayBlockingQueue<Runnable>(10));
+    private static ExecutorService pool = new ThreadPoolExecutor(10, 10, 60L, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(10));
+
     public static void main(String[] args) {
         ReetranLockTest test = new ReetranLockTest();
         ReetrantLock_PrintWaitthread lock = test.new ReetrantLock_PrintWaitthread(false);
-        for(int i=0;i<5;i++) {
+        for (int i = 0; i < 5; i++) {
             pool.execute(test.new Job(lock));
         }
 
 
-       pool.shutdown();
+        pool.shutdown();
     }
 
     // just to print threads waiting to get the lock
     class ReetrantLock_PrintWaitthread extends ReentrantLock {
-        public ReetrantLock_PrintWaitthread(boolean fair){
+        public ReetrantLock_PrintWaitthread(boolean fair) {
             super(fair);
         }
+
         public Collection<Thread> getQueuedThreads() {
             return super.getQueuedThreads();
         }
     }
 
-    class Job extends Thread{
+    class Job extends Thread {
         private ReetrantLock_PrintWaitthread lock;
-        public Job(ReetrantLock_PrintWaitthread lock){
+
+        public Job(ReetrantLock_PrintWaitthread lock) {
             this.lock = lock;
         }
 

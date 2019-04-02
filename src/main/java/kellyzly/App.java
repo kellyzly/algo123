@@ -10,18 +10,20 @@ import java.util.concurrent.TimeUnit;
  */
 public class App {
 
-    private static ExecutorService pool = new ThreadPoolExecutor(10,10, 60L, TimeUnit.SECONDS,
-             new ArrayBlockingQueue<Runnable>(10));
+    private static ExecutorService pool = new ThreadPoolExecutor(10, 10, 60L, TimeUnit.SECONDS,
+            new ArrayBlockingQueue<Runnable>(10));
 
 
-      private class SubThread implements Runnable{
+    private class SubThread implements Runnable {
         private int id;
-        public SubThread(int id){
+
+        public SubThread(int id) {
             this.id = id;
         }
-       public void run(){
-           System.out.println(id);
-       }
+
+        public void run() {
+            System.out.println(id);
+        }
     }
 
     public static void main(String[] args) {
@@ -32,10 +34,10 @@ public class App {
 
 
         App app = new App();
-     for(int i=0;i<10;i++){
+        for (int i = 0; i < 10; i++) {
 
-          pool.execute(app.new SubThread(i));
-     }
+            pool.execute(app.new SubThread(i));
+        }
 
 
     }
